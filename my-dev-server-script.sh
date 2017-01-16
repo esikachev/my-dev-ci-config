@@ -12,8 +12,8 @@ case "${TOX_ENV}" in
     functional-client)
         start_server
         get_dependency esikachev/my-dev-client
-        cd my-dev-client;
-        tox -e functional;
+        cd my-dev-client
+        tox -e functional
         cd -;
         ;;
     *)

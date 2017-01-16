@@ -5,12 +5,12 @@
 case "${TOX_ENV}" in
         functional)
             get_dependency esikachev/my-dev-server
-            cd my-dev-server;
-            start_server;
-            cat etc/my-dev-server/my-dev-server.conf;
-            cd -;
+            cd my-dev-server
+            start_server
+            cat etc/my-dev-server/my-dev-server.conf
+            cd -
             ;;
         *)
-            tox -e "${TOX_ENV}";
+            tox -e "${TOX_ENV}"
             ;;
 esac

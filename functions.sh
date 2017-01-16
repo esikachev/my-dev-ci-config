@@ -14,15 +14,15 @@ prepare_osx(){
 
 get_dependency() {
     local project_name=$1
-    git clone https://github.com/$(project_name)
+    git clone https://github.com/${project_name}
 }
 
 migrate_db() {
-    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' etc/my-dev-server/my-dev-server.conf;
-    tox -e venv -- my-dev-migrate --config-file etc/my-dev-server/my-dev-server.conf;
+    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' etc/my-dev-server/my-dev-server.conf
+    tox -e venv -- my-dev-migrate --config-file etc/my-dev-server/my-dev-server.conf
 }
 
 start_server() {
     migrate_db
-    tmux new -d 'tox -e venv -- my-dev-server --config-file etc/my-dev-server/my-dev-server.conf >> my-dev-server-logs';
+    tmux new -d 'tox -e venv -- my-dev-server --config-file etc/my-dev-server/my-dev-server.conf >> my-dev-server-logs'
 }
