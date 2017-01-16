@@ -2,6 +2,7 @@
 
 . ${WORKSPACE}/functions.sh
 
+printenv
 case "${TOXENV}" in
     api)
         start_server
