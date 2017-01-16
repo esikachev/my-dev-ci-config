@@ -12,10 +12,10 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     prepare_osx
 fi
 
-if [[ 'client' =~ $TRAVIS_REPO_SLUG ]]; then
+if [[ 'esikachev/my-dev-client' == $TRAVIS_REPO_SLUG ]]; then
     my-dev-client-script.sh
 fi
 
-if [[ 'server' =~ $TRAVIS_REPO_SLUG ]]; then
+if [[ 'esikachev/my-dev-server' == $TRAVIS_REPO_SLUG ]]; then
     my-dev-server-script.sh
 fi
