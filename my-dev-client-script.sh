@@ -8,7 +8,7 @@ case "${TOX_ENV}" in
             cd my-dev-server
             start_server
             cat etc/my-dev-server/my-dev-server.conf
-            cd -
+	    tox -e functional
             ;;
         *)
             tox -e "${TOX_ENV}"

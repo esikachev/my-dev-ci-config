@@ -5,6 +5,7 @@
 case "${TOX_ENV}" in
     api)
         start_server
+	tox -e api
         ;;
     migration)
         migrate_db
