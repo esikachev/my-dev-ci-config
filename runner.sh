@@ -13,9 +13,9 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
 fi
 
 if [[ 'esikachev/my-dev-client' == $TRAVIS_REPO_SLUG ]]; then
-    my-dev-client-script.sh
+    ${WORKSPACE}/my-dev-client-script.sh
 fi
 
 if [[ 'esikachev/my-dev-server' == $TRAVIS_REPO_SLUG ]]; then
-    my-dev-server-script.sh
+    ${WORKSPACE}/my-dev-server-script.sh
 fi
