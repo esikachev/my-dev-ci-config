@@ -2,8 +2,7 @@
 
 . ${WORKSPACE}/functions.sh
 
-printenv
-case "${TOXENV}" in
+case "${TOX_ENV}" in
     api)
         start_server
         ;;
@@ -18,6 +17,6 @@ case "${TOXENV}" in
         cd -;
         ;;
     *)
-        tox -e "${TOXENV}"
+        tox -e "${TOX_ENV}"
         ;;
 esac

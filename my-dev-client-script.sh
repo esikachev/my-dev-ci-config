@@ -2,7 +2,7 @@
 
 . ${WORKSPACE}/functions.sh
 
-case "${TOXENV}" in
+case "${TOX_ENV}" in
         functional)
             get_dependency esikachev/my-dev-server
             cd my-dev-server;
@@ -11,6 +11,6 @@ case "${TOXENV}" in
             cd -;
             ;;
         *)
-            tox -e "${TOXENV}";
+            tox -e "${TOX_ENV}";
             ;;
 esac
