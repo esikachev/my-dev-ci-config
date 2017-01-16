@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
-. functions.sh;
+export WORKSPACE=$(pwd)/my-dev-ci-config
+
+. ${WORKSPACE}/functions.sh
 
 if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     prepare_linux
@@ -10,10 +12,10 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     prepare_osx
 fi
 
-if [[ 'client' ~= $TRAVIS_REPO_SLUG ]]; then
+if [[ 'client' =~ $TRAVIS_REPO_SLUG ]]; then
     my-dev-client-script.sh
 fi
 
-if [[ 'server' ~= $TRAVIS_REPO_SLUG ]]; then
+if [[ 'server' =~ $TRAVIS_REPO_SLUG ]]; then
     my-dev-server-script.sh
 fi

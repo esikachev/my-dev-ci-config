@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-. functions.sh
+. ${WORKSPACE}/functions.sh
 
 case "${TOXENV}" in
     api)
