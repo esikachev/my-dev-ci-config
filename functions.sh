@@ -18,7 +18,6 @@ get_dependency() {
 }
 
 migrate_db() {
-    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' etc/my-dev-server/my-dev-server.conf
     tox -e venv -- my-dev-migrate --config-file etc/my-dev-server/my-dev-server.conf
 }
 
