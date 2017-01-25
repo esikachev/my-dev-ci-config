@@ -1,6 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash -xe
 
-. ${WORKSPACE}/functions.sh
+. "${WORKSPACE}"/functions.sh
 
 case "${TOX_ENV}" in
     api)
@@ -13,9 +13,9 @@ case "${TOX_ENV}" in
     functional-client)
         start_server
         get_dependency esikachev/my-dev-client
-        cd my-dev-client
+        cd my-dev-client || exit
         tox -e functional
-        cd -;
+        cd - || exit;
         ;;
     *)
         tox -e "${TOX_ENV}"

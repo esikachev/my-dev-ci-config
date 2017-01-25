@@ -1,8 +1,10 @@
-#!/bin/bash -x
+#!/bin/bash -xe
 
-export WORKSPACE=$(pwd)/my-dev-ci-config
+export WORKSPACE
+WORKSPACE=$(pwd)/my-dev-ci-config
 
-. ${WORKSPACE}/functions.sh
+# shellcheck source=/dev/null
+. "${WORKSPACE}"/functions.sh
 
 if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     prepare_linux
@@ -12,10 +14,10 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     prepare_osx
 fi
 
-if [[ 'esikachev/my-dev-client' == $TRAVIS_REPO_SLUG ]]; then
-    ${WORKSPACE}/my-dev-client-script.sh
+if [[ 'esikachev/my-dev-client' == "$TRAVIS_REPO_SLUG" ]]; then
+    "${WORKSPACE}"/my-dev-client-script.sh
 fi
 
-if [[ 'esikachev/my-dev-server' == $TRAVIS_REPO_SLUG ]]; then
-    ${WORKSPACE}/my-dev-server-script.sh
+if [[ 'esikachev/my-dev-server' == "$TRAVIS_REPO_SLUG" ]]; then
+    "${WORKSPACE}"/my-dev-server-script.sh
 fi
