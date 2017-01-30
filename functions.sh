@@ -1,5 +1,8 @@
 #!/bin/bash -x
 
+cp etc/my-dev-server/my-dev-server.conf.sample etc/my-dev-server/my-dev-server.conf
+export CONFIG_PATH='etc/my-dev-server/my-dev-server.conf'
+
 prepare_linux(){
     pip install tox
     sudo apt-get install -y tmux
@@ -18,11 +21,11 @@ get_dependency() {
 }
 
 migrate_db() {
-    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' etc/my-dev-server/my-dev-server.conf
-    tox -e venv -- my-dev-migrate --config-file etc/my-dev-server/my-dev-server.conf
+    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' ${CONFIG_PATH}
+    tox -e venv -- my-dev-migrate --config-file ${CONFIG_PATH}
 }
 
 start_server() {
     migrate_db
-    tmux new -d 'tox -e venv -- my-dev-server --config-file etc/my-dev-server/my-dev-server.conf >> my-dev-server-logs'
+    tmux new -d 'tox -e venv -- my-dev-server --config-file ${CONFIG_PATH} >> my-dev-server-logs'
 }
