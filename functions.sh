@@ -1,7 +1,10 @@
 #!/bin/bash -x
 
-cp etc/my-dev-server/my-dev-server.conf.sample etc/my-dev-server/my-dev-server.conf
 export CONFIG_PATH='etc/my-dev-server/my-dev-server.conf'
+
+prepare_config(){
+    cp etc/my-dev-server/my-dev-server.conf.sample etc/my-dev-server/my-dev-server.conf
+}
 
 prepare_linux(){
     pip install tox
@@ -21,6 +24,7 @@ get_dependency() {
 }
 
 migrate_db() {
+    prepare_config
     sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' ${CONFIG_PATH}
     tox -e venv -- my-dev-migrate --config-file ${CONFIG_PATH}
 }
