@@ -5,7 +5,7 @@
 case "${TOX_ENV}" in
     api)
         start_server
-	tox -e api
+        tox -e api
         ;;
     migration)
         migrate_db
@@ -15,6 +15,13 @@ case "${TOX_ENV}" in
         get_dependency esikachev/my-dev-client
         cd my-dev-client || exit
         tox -e functional
+        cd - || exit;
+        ;;
+    cli-client)
+        start_server
+        get_dependency esikachev/my-dev-client
+        cd my-dev-client || exit
+        tox -e cli
         cd - || exit;
         ;;
     *)
