@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-export ADD_PROJECT_DIR='${HOME}/my-dev-add'
-export CONFIG_FILE='${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf'
+export ADD_PROJECT_DIR=${HOME}/my-dev-add
+export CONFIG_FILE=${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf
 
 prepare_config(){
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
