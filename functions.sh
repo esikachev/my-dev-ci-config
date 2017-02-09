@@ -36,7 +36,7 @@ start_server() {
     cat ${CONFIG_FILE}
 }
 
-prepare_client() {
+prepare_server() {
     get_dependency esikachev/my-dev-server
     cd ${ADD_PROJECT_DIR} || exit
     start_server
