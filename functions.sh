@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-export SERVER_DIR='~/my-dev-server'
-export CONFIG_PATH='${SERVER_DIR}/etc/my-dev-server/my-dev-server.conf'
+export ADD_PROJECT_DIR='${HOME}/my-dev-add'
+export CONFIG_PATH='${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf'
 
 prepare_config(){
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
@@ -21,7 +21,7 @@ prepare_osx(){
 
 get_dependency() {
     local project_name=$1
-    git clone https://github.com/${project_name} ${SERVER_DIR}
+    git clone https://github.com/${project_name} ${ADD_PROJECT_DIR}
 }
 
 migrate_db() {
