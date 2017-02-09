@@ -35,3 +35,11 @@ start_server() {
     tmux new -d 'tox -e venv -- my-dev-server --config-file ${CONFIG_PATH} >> my-dev-server-logs'
     cat ${CONFIG_FILE}
 }
+
+prepare_client() {
+    get_dependency esikachev/my-dev-server
+    cd ${ADD_PROJECT_DIR} || exit
+    start_server
+    cd -
+
+}

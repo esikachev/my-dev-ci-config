@@ -4,24 +4,15 @@
 
 case "${TOX_ENV}" in
         functional)
-            get_dependency esikachev/my-dev-server
-            cd $HOME/my-dev-server || exit
-            start_server
-            cd -
+            prepare_server
             tox -e functional
             ;;
         cli)
-            get_dependency esikachev/my-dev-server
-            cd $HOME/my-dev-server || exit
-            start_server
-            cd -
+            prepare_server
             tox -e cli
             ;;
         cover)
-            get_dependency esikachev/my-dev-server
-            cd $HOME/my-dev-server || exit
-            start_server
-            cd -
+            prepare_server
             tox -e cover
             ;;
         *)
