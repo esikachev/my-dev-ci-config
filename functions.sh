@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 export ADD_PROJECT_DIR='${HOME}/my-dev-add'
-export CONFIG_PATH='${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf'
+export CONFIG_FILE='${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf'
 
 prepare_config(){
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
@@ -26,13 +26,13 @@ get_dependency() {
 
 migrate_db() {
     prepare_config
-    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' ${CONFIG_PATH}
-    tox -e venv -- my-dev-migrate --config-file ${CONFIG_PATH}
+    sed -i '/log_dir=/c\log_dir=/home/travis/build/esikachev/my-dev-server' ${CONFIG_FILE}
+    tox -e venv -- my-dev-migrate --config-file ${CONFIG_FILE}
 }
 
 start_server() {
     migrate_db
-    tmux new -d 'tox -e venv -- my-dev-server --config-file ${CONFIG_PATH} >> my-dev-server-logs'
+    tmux new -d 'tox -e venv -- my-dev-server --config-file ${CONFIG_FILE} >> my-dev-server-logs'
     cat ${CONFIG_FILE}
 }
 
