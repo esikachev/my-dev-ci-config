@@ -1,9 +1,10 @@
 #!/bin/bash -x
 
-export CONFIG_PATH='etc/my-dev-server/my-dev-server.conf'
+export SERVER_DIR='~/my-dev-server'
+export CONFIG_PATH='${SERVER_DIR}/etc/my-dev-server/my-dev-server.conf'
 
 prepare_config(){
-    cp etc/my-dev-server/my-dev-server.conf.sample etc/my-dev-server/my-dev-server.conf
+    cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
 }
 
 prepare_linux(){
@@ -20,7 +21,7 @@ prepare_osx(){
 
 get_dependency() {
     local project_name=$1
-    git clone https://github.com/${project_name}
+    git clone https://github.com/${project_name} ${SERVER_DIR}
 }
 
 migrate_db() {
@@ -32,4 +33,5 @@ migrate_db() {
 start_server() {
     migrate_db
     tmux new -d 'tox -e venv -- my-dev-server --config-file ${CONFIG_PATH} >> my-dev-server-logs'
+    cat ${CONFIG_FILE}
 }
