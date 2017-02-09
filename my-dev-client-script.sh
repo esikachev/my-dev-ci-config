@@ -19,6 +19,14 @@ case "${TOX_ENV}" in
             cd -
             tox -e cli
             ;;
+        cover)
+            get_dependency esikachev/my-dev-server
+            cd my-dev-server || exit
+            start_server
+            cat etc/my-dev-server/my-dev-server.conf
+            cd -
+            tox -e cover
+            ;;
         *)
             tox -e "${TOX_ENV}"
             ;;
