@@ -1,9 +1,9 @@
 #!/bin/bash -x
 
-export ADD_PROJECT_DIR=${HOME}/my-dev-add
-export CONFIG_FILE=${ADD_PROJECT_DIR}/etc/my-dev-server/my-dev-server.conf
+export CONFIG_FILE=${SERVER_DIR}/etc/my-dev-server/my-dev-server.conf
 
 prepare_config(){
+    ls $SERVER_DIR
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
 }
 
@@ -11,8 +11,8 @@ prepare_linux(){
     pip install tox
     sudo apt-get install -y tmux
     mysql -e 'CREATE DATABASE IF NOT EXISTS my_dev;'
-
 }
+
 prepare_osx(){
     pip install tox
     sudo brew install -y tmux
@@ -21,7 +21,8 @@ prepare_osx(){
 
 get_dependency() {
     local project_name=$1
-    git clone https://github.com/${project_name} ${ADD_PROJECT_DIR}
+    local directory=$2
+    git clone https://github.com/esikachev/${project_name} ${directory}
 }
 
 migrate_db() {
@@ -37,8 +38,10 @@ start_server() {
 }
 
 prepare_server() {
-    get_dependency esikachev/my-dev-server
-    cd ${ADD_PROJECT_DIR} || exit
+    if [[ $TRAVIS_REPO_SLUG != *"server"* ]]; then
+        get_dependency my-dev-server $SERVER_DIR
+    fi
+    cd ${SERVER_DIR} || exit
     start_server
     cd -
 
