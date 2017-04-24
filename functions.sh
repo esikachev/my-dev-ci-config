@@ -2,16 +2,17 @@
 
 export CONFIG_FILE=${SERVER_DIR}/etc/my-dev-server/my-dev-server.conf
 
-prepare_os() {
-    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        prepare_osx
-    fi
-}
-
 prepare_config() {
     prepare_os
     ls $SERVER_DIR
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
+}
+
+
+prepare_linux() {
+    pip install tox
+    sudo apt-get install -y tmux
+    mysql -e 'CREATE DATABASE IF NOT EXISTS my_dev;'
 }
 
 prepare_osx() {
