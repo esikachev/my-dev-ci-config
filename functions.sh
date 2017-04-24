@@ -16,7 +16,6 @@ prepare_linux() {
 prepare_osx() {
     brew update
     pip install tox
-    brew install -y tmux
     mysql -e 'CREATE DATABASE IF NOT EXISTS my_dev;'
 }
 
