@@ -3,11 +3,9 @@
 export CONFIG_FILE=${SERVER_DIR}/etc/my-dev-server/my-dev-server.conf
 
 prepare_config() {
-    prepare_os
     ls $SERVER_DIR
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
 }
-
 
 prepare_linux() {
     pip install tox
