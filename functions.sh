@@ -7,18 +7,6 @@ prepare_config(){
     cp ${CONFIG_FILE}.sample ${CONFIG_FILE}
 }
 
-prepare_linux(){
-    pip install tox
-    sudo apt-get install -y tmux
-    mysql -e 'CREATE DATABASE IF NOT EXISTS my_dev;'
-}
-
-prepare_osx(){
-    pip install tox
-    sudo brew install -y tmux
-    mysql -e 'CREATE DATABASE IF NOT EXISTS my_dev;'
-}
-
 get_dependency() {
     local project_name=$1
     local directory=$2
